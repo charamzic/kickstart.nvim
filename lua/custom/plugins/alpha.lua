@@ -44,7 +44,6 @@ return {
       dashboard.button('e', '  New', '<cmd>ene<CR>'),
       dashboard.button('-', '  Open', '<cmd>Oil<CR>'),
       dashboard.button('<leader>sf', '󰱼  Search file', '<cmd>Telescope find_files<CR>'),
-      dashboard.button('<leader>sg', '  Search string', '<cmd>Telescope live_grep<CR>'),
       dashboard.button('<leader>Swr', '󰁯  Restore session', '<cmd>SessionRestore<CR>'),
       dashboard.button('q', '  Quit', '<cmd>qa<CR>'),
     }
