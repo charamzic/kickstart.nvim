@@ -73,6 +73,35 @@ vim.opt.scrolloff = 14
 -- No tabs, only spaces
 vim.opt.expandtab = true
 
+-- TERMINAL
+local set = vim.opt_local
+
+vim.api.nvim_create_autocmd("TermOpen", {
+   group = vim.api.nvim_create_augroup("custom-term-open", {}),
+   callback = function()
+      set.number = false
+      set.relativenumber = false
+      set.scrolloff = 0
+   end,
+})
+
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
+
+vim.keymap.set("n", ",tt", function()
+   vim.cmd.new()
+   vim.cmd.wincmd "J"
+   vim.api.nvim_win_set_height(0, 12)
+   vim.wo.winfixheight = true
+   vim.cmd.term()
+   vim.cmd.startinsert()
+end)
+
+vim.filetype.add {
+   extension = {
+      etlua = "html",
+   },
+}
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -341,6 +370,22 @@ require("lazy").setup({
          vim.keymap.set("n", "<leader>sn", function()
             builtin.find_files { cwd = vim.fn.stdpath "config" }
          end, { desc = "[S]earch [N]eovim files" })
+
+         vim.keymap.set("n", "<leader>sp", function()
+            builtin.find_files { cwd = "~/notes" }
+         end, { desc = "[S]earch [P]ersonal" })
+
+         vim.keymap.set("n", "<leader>sa", function()
+            builtin.find_files { cwd = "~/code/m7.eua-auction" }
+         end, { desc = "[S]earch [A]uction" })
+
+         vim.keymap.set("n", "<leader>sl", function()
+            builtin.find_files { cwd = "~/code/energy.automation.deployments" }
+         end, { desc = "[S]earch Dep[l]oyments" })
+
+         vim.keymap.set("n", "<leader>si", function()
+            builtin.find_files { cwd = "~/code/energy.automation.inventory" }
+         end, { desc = "[S]earch [I]nventory" })
       end,
    },
 
