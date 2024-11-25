@@ -1,4 +1,4 @@
--- Set <space> as the leader key
+--m7a_internal_certificate_env Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
@@ -29,7 +29,9 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = "unnamedplus"
+vim.schedule(function()
+   vim.opt.clipboard = "unnamedplus"
+end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -357,8 +359,7 @@ require("lazy").setup({
             })
          end, { desc = "[/] Fuzzily search in current buffer" })
 
-         -- It's also possible to pass additional configuration options.
-         --  See `:help telescope.builtin.live_grep()` for information about particular keys
+         --  See `:help telescope.builtin.live_grep()`
          vim.keymap.set("n", "<leader>s/", function()
             builtin.live_grep {
                grep_open_files = true,
@@ -366,7 +367,6 @@ require("lazy").setup({
             }
          end, { desc = "[S]earch [/] in Open Files" })
 
-         -- Shortcut for searching your Neovim configuration files
          vim.keymap.set("n", "<leader>sn", function()
             builtin.find_files { cwd = vim.fn.stdpath "config" }
          end, { desc = "[S]earch [N]eovim files" })
@@ -375,17 +375,45 @@ require("lazy").setup({
             builtin.find_files { cwd = "~/notes" }
          end, { desc = "[S]earch [P]ersonal" })
 
-         vim.keymap.set("n", "<leader>sa", function()
+         vim.keymap.set("n", "<leader>sea", function()
             builtin.find_files { cwd = "~/code/m7.eua-auction" }
          end, { desc = "[S]earch [A]uction" })
 
-         vim.keymap.set("n", "<leader>sl", function()
-            builtin.find_files { cwd = "~/code/energy.automation.deployments" }
-         end, { desc = "[S]earch Dep[l]oyments" })
+         vim.keymap.set("n", "<leader>gea", function()
+            builtin.live_grep { cwd = "~/code/m7.eua-auction" }
+         end, { desc = "[G]rep [A]uction" })
 
-         vim.keymap.set("n", "<leader>si", function()
+         vim.keymap.set("n", "<leader>sed", function()
+            builtin.find_files { cwd = "~/code/energy.automation.deployments" }
+         end, { desc = "[S]earch [D]eployments" })
+
+         vim.keymap.set("n", "<leader>ged", function()
+            builtin.live_grep { cwd = "~/code/energy.automation.deployments" }
+         end, { desc = "[G]rep [D]eployments" })
+
+         vim.keymap.set("n", "<leader>sei", function()
             builtin.find_files { cwd = "~/code/energy.automation.inventory" }
          end, { desc = "[S]earch [I]nventory" })
+
+         vim.keymap.set("n", "<leader>gei", function()
+            builtin.live_grep { cwd = "~/code/energy.automation.inventory" }
+         end, { desc = "[G]rep [I]nventory" })
+
+         vim.keymap.set("n", "<leader>sem", function()
+            builtin.find_files { cwd = "~/code/automation.monitoring" }
+         end, { desc = "[S]earch [M]onitoring" })
+
+         vim.keymap.set("n", "<leader>gem", function()
+            builtin.live_grep { cwd = "~/code/automation.monitoring" }
+         end, { desc = "[G]rep [M]onitoring" })
+
+         vim.keymap.set("n", "<leader>sej", function()
+            builtin.find_files { cwd = "~/code/automation.jenkins" }
+         end, { desc = "[S]earch [J]enkins" })
+
+         vim.keymap.set("n", "<leader>gej", function()
+            builtin.live_grep { cwd = "~/code/automation.jenkins" }
+         end, { desc = "[G]rep [J]enkins" })
       end,
    },
 
@@ -880,6 +908,7 @@ require("lazy").setup({
          ensure_installed = {
             "bash",
             "c",
+            "go",
             "diff",
             "html",
             "lua",
