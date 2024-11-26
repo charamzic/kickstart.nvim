@@ -1,41 +1,4 @@
 --[[
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .----------------------.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ___________      ========
-========        /::::::::::|  |::::::::::\  \ no mouse \     ========
-========       /:::========|  |==hjkl==:::\  \ required \    ========
-========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
-
-What is Kickstart?
-
-  Kickstart.nvim is *not* a distribution.
-
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
-
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
-
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
-
     After understanding a bit more about Lua, you can use `:help lua-guide` as a
     reference for how Neovim integrates Lua.
     - :help lua-guide
@@ -450,6 +413,64 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      -- Search and grep in custom repos
+
+      vim.keymap.set('n', '<leader>sj', function()
+        builtin.find_files {
+          cwd = '/home/bs338/code/automation.jenkins/',
+          prompt_title = 'Files in automation.jenkins',
+        }
+      end, { desc = '[S]earch [J]enkins files' })
+
+      vim.keymap.set('n', '<leader>sgj', function()
+        builtin.live_grep {
+          cwd = '/home/bs338/code/automation.jenkins/',
+          prompt_title = 'Grep in automation.jenkins',
+        }
+      end, { desc = '[S]earch [G]rep [J]enkins files' })
+
+      vim.keymap.set('n', '<leader>sm', function()
+        builtin.find_files {
+          cwd = '/home/bs338/code/automation.monitoring/',
+          prompt_title = 'Files in automation.monitoring',
+        }
+      end, { desc = '[S]earch [M]onitoring files' })
+
+      vim.keymap.set('n', '<leader>sgm', function()
+        builtin.live_grep {
+          cwd = '/home/bs338/code/automation.monitoring/',
+          prompt_title = 'Grep in automation.monitoring',
+        }
+      end, { desc = '[S]earch [G]rep [M]onitoring files' })
+
+      vim.keymap.set('n', '<leader>sd', function()
+        builtin.find_files {
+          cwd = '/home/bs338/code/energy.automation.deployments/',
+          prompt_title = 'Files in automation.deployments',
+        }
+      end, { desc = '[S]earch [D]eployments' })
+
+      vim.keymap.set('n', '<leader>sgd', function()
+        builtin.live_grep {
+          cwd = '/home/bs338/code/energy.automation.deployments/',
+          prompt_title = 'Grep in automation.deployments',
+        }
+      end, { desc = '[S]earch [G]rep [D]eployments files' })
+
+      vim.keymap.set('n', '<leader>si', function()
+        builtin.find_files {
+          cwd = '/home/bs338/code/energy.automation.inventory/',
+          prompt_title = 'Files in automation.inventory',
+        }
+      end, { desc = '[S]earch [I]nventory' })
+
+      vim.keymap.set('n', '<leader>sgi', function()
+        builtin.live_grep {
+          cwd = '/home/bs338/code/energy.automation.inventory/',
+          prompt_title = 'Grep in automation.inventory',
+        }
+      end, { desc = '[S]earch [G]rep [I]nventory files' })
     end,
   },
 
@@ -857,6 +878,9 @@ require('lazy').setup({
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
+    opts = {
+      transparent = true,
+    },
     init = function()
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
