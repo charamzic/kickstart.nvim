@@ -9,8 +9,11 @@ return {
   config = function()
     require('nvim-autopairs').setup {}
     -- If you want to automatically add `(` after selecting a function or method
-    local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-    local cmp = require 'cmp'
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    -- Only set up the cmp integration if cmp is available
+    local cmp_ok, cmp = pcall(require, 'cmp')
+    if cmp_ok then
+      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    end
   end,
 }

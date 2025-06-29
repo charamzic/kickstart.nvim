@@ -644,28 +644,6 @@ require('lazy').setup({
       },
     },
   },
-   {
-    'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'saadparwaiz1/cmp_luasnip' },
-    config = function()
-      local cmp = require('cmp')
-
-      cmp.setup({
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
-          { name = 'path' },
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-space>'] = cmp.mapping.complete(),
-          ['<CR>'] = cmp.mapping.confirm({ select = false }),
-          ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        }),
-      })
-    end,
-  },
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -969,6 +947,7 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
+    version = 'v0.0.1',
     event = 'InsertEnter',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
