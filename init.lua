@@ -242,18 +242,18 @@ require('lazy').setup({
   -- options to `gitsigns.nvim`.
   --
   -- See `:help gitsigns` to understand what the configuration keys do
-  -- { -- Adds git related signs to the gutter, as well as utilities for managing changes
-  --   'lewis6991/gitsigns.nvim',
-  --   opts = {
-  --     signs = {
-  --       add = { text = '+' },
-  --       change = { text = '~' },
-  --       delete = { text = '_' },
-  --       topdelete = { text = '‾' },
-  --       changedelete = { text = '~' },
-  --     },
-  --   },
-  -- },
+  { -- Adds git related signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+    },
+  },
 
   -- Oil explorer
   {
@@ -371,7 +371,7 @@ require('lazy').setup({
       workspaces = {
         {
           name = 'personal',
-          path = '~/notes',
+          path = '~/git/notes',
         },
       },
 
@@ -558,7 +558,7 @@ require('lazy').setup({
       end, { desc = '[/] Fuzzily search in current buffer' })
 
       -- It's also possible to pass additional configuration options.
-      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      -- See `:help telescope.builtin.live_grep()` for information about particular keys
       vim.keymap.set('n', '<leader>s/', function()
         builtin.live_grep {
           grep_open_files = true,
@@ -571,63 +571,20 @@ require('lazy').setup({
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
 
-      -- Search and grep in custom repos
-
-      vim.keymap.set('n', '<leader>sj', function()
+      -- Search and grep in all repos in git dir
+      vim.keymap.set('n', '<leader>sfg', function()
         builtin.find_files {
-          cwd = '/home/bs338/code/automation.jenkins/',
-          prompt_title = 'Files in automation.jenkins',
+          cwd = '/home/jan/git/dbg',
+          prompt_title = 'Search files in git',
         }
-      end, { desc = '[S]earch [J]enkins files' })
+      end, { desc = '[S]earch [F]iles in [G]it' })
 
-      vim.keymap.set('n', '<leader>sgj', function()
+      vim.keymap.set('n', '<leader>sgg', function()
         builtin.live_grep {
-          cwd = '/home/bs338/code/automation.jenkins/',
-          prompt_title = 'Grep in automation.jenkins',
+          cwd = '/home/jan/git/dbg',
+          prompt_title = 'Search Grep in git',
         }
-      end, { desc = '[S]earch [G]rep [J]enkins files' })
-
-      vim.keymap.set('n', '<leader>sm', function()
-        builtin.find_files {
-          cwd = '/home/bs338/code/automation.monitoring/',
-          prompt_title = 'Files in automation.monitoring',
-        }
-      end, { desc = '[S]earch [M]onitoring files' })
-
-      vim.keymap.set('n', '<leader>sgm', function()
-        builtin.live_grep {
-          cwd = '/home/bs338/code/automation.monitoring/',
-          prompt_title = 'Grep in automation.monitoring',
-        }
-      end, { desc = '[S]earch [G]rep [M]onitoring files' })
-
-      vim.keymap.set('n', '<leader>sd', function()
-        builtin.find_files {
-          cwd = '/home/bs338/code/energy.automation.deployments/',
-          prompt_title = 'Files in automation.deployments',
-        }
-      end, { desc = '[S]earch [D]eployments' })
-
-      vim.keymap.set('n', '<leader>sgd', function()
-        builtin.live_grep {
-          cwd = '/home/bs338/code/energy.automation.deployments/',
-          prompt_title = 'Grep in automation.deployments',
-        }
-      end, { desc = '[S]earch [G]rep [D]eployments files' })
-
-      vim.keymap.set('n', '<leader>si', function()
-        builtin.find_files {
-          cwd = '/home/bs338/code/energy.automation.inventory/',
-          prompt_title = 'Files in automation.inventory',
-        }
-      end, { desc = '[S]earch [I]nventory' })
-
-      vim.keymap.set('n', '<leader>sgi', function()
-        builtin.live_grep {
-          cwd = '/home/bs338/code/energy.automation.inventory/',
-          prompt_title = 'Grep in automation.inventory',
-        }
-      end, { desc = '[S]earch [G]rep [I]nventory files' })
+      end, { desc = '[S]earch [G]rep in [G]it' })
     end,
   },
 
